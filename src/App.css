@@ -1,0 +1,171 @@
+body{
+    background-color: #ccc;
+    overflow: hidden;
+}
+
+.main{
+    display:flex;
+    flex-wrap:wrap;
+}
+
+.main__nav{
+    background-color: #ccc;
+    width:25%;
+}
+
+.main__nav-close{
+    height: 100vh;
+    width:60px;
+    background-color: #ccc;
+}
+
+.main__map{
+    padding-top:2%;
+    background-color: #ccc;
+    width:75%;
+}
+
+.main__map-close{
+    padding-top:2%;
+    background-color: #ccc;
+    width:calc(100% - 60px);
+}
+
+.list{
+  display:flex;
+  flex-direction: column;
+  align-content: center;
+  height:100vh;
+  background-color:#ccc;
+}
+
+.list__nav{
+  display:flex;
+  justify-content: space-around;
+    padding:10px 0;
+}
+
+ .menu__button {
+     margin-left:85%;
+   font-size:25px;
+  cursor:pointer;
+  background-color: transparent;
+  border:none;
+  transition: transform .5s;
+}
+
+.menu__button:hover {
+  color:#2e2e2e;
+ transform: rotate(180deg);
+}
+
+.menu__button-no-rotate {
+    font-size:25px;
+    cursor:pointer;
+    background-color: transparent;
+    border:none;
+}
+
+.list__content{
+  width:100%;
+}
+
+.list__content input{
+    display:inline;
+    width:98%;
+    height:40px;
+    padding:10px;
+    z-index:1;
+}
+
+.list__content button{
+    position: relative;
+    top: -50px;
+    left: 90%;
+    border:none;
+    background: none;
+    display:inline;
+    height:40px;
+    padding:10px;
+    z-index: 2;
+}
+
+.list__content button:hover{
+    cursor: pointer;
+}
+
+.list__content button:disabled{
+    cursor: not-allowed;
+}
+
+.list__content-list{
+    margin-top:-24px;
+    font-size:20px;
+}
+
+.list__content-list ul{
+    margin:0;
+    padding:0;
+    list-style-type: none;
+}
+
+.list__content-list ul li{
+    cursor:pointer;
+    border:2px solid #eee;
+    margin:5px 0 ;
+    padding:10px;
+}
+
+.list__content-list ul li:hover{
+    color:#ccc;
+    background-color: #909090;
+}
+
+
+#tips__list {
+    list-style-type: none;
+    font-size:15px;
+    padding:0;
+}
+
+#marker__body{
+    height:25vh;
+    width:400px;
+}
+
+@media screen and (max-width:770px){
+    .main__nav {
+        width:40%;
+    }
+    .main__map {
+        width:60%;
+    }
+}
+
+
+@media screen and (max-width:475px){
+    body{
+        overflow: scroll;
+    }
+    #map{
+        height:100vh;
+        width:100vw !important;
+    }
+    .main{
+        flex-direction: column;
+    }
+    .list{
+        height: 100%;
+    }
+    .main__nav {
+        overflow: scroll;
+        height:50vh;
+        width:100%;
+    }
+    .main__nav-close{
+        height:unset;
+    }
+    .main__map {
+        width:100%;
+    }
+}
