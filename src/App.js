@@ -30,6 +30,10 @@ class App extends Component {
         this.setPlaces = this.setPlaces.bind(this);
       }
 
+      componentDidMount(){
+        window.gm_authFailure = this.gm_authFailure;
+    }
+
     addMarker(marker) {
         this.markers.push(marker);
 
@@ -40,6 +44,10 @@ class App extends Component {
 
     setPlaces(places){
         this.setState({places:places})
+    }
+
+    gm_authFailure(){
+        window.alert("There is problem with Google's API")
     }
 
   render() {

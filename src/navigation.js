@@ -56,13 +56,15 @@ class Navigation extends Component{
                                 <h3>Neighbourhood App</h3>
                             </div>
                             <div className="list__content">
-                                <input className="list__content-input"
+                            <label style={{fontWeight:500}} htmlFor="searchInput">Type restaurant</label>
+                                <input name="searchInput"
+                                className="list__content-input"
                                        type="text"
                                        placeholder="Search place"
                                        value={query}
                                        onChange={(event) => this.updateQuery(event.target.value)} />
                                 {this.state.query&&(
-                                    <button onClick={() => this.clearQuery()}><i className="fas fa-times"></i></button>
+                                    <button name="Clear query button" onClick={() => this.clearQuery()}><i className="fas fa-times"></i></button>
                                 )}
                                 {!this.state.query&&(
                                     <button disabled><i className="fas fa-times"></i></button>
@@ -73,7 +75,7 @@ class Navigation extends Component{
                                 <ul>
                                     {this.showingPlaces&&(
                                         this.showingPlaces.map(location =>(
-                                            <li key={location.props.name} onClick={(e) => this.setMarker(location)}><button>{location.props.name}</button></li>
+                                            <li key={location.props.name} onClick={(e) => this.setMarker(location)}><button name={location.props.name}>{location.props.name}</button></li>
                                         ))
                                     )}
                                 </ul>

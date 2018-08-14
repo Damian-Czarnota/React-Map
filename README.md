@@ -26,3 +26,12 @@ Each marker has an extra information about place to which it is attached (functi
 3. Run ``` npm install ```
 4. Run ``` npm start ```
 5. Open your [localhost](localhost:3000)
+
+# Offline app
+App works offline only in production build.
+1. Clone the project: ``` git clone https://github.com/Damian-Czarnota/React-Map.git ```
+2. Go to the folder when project exists: ``` cd map ```
+3. Run ``` npm install ```
+4. Run ```npm run build```
+5. Run ```serve -s build``
+6. Open your [localhost](localhost:5000)
