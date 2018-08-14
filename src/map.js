@@ -15,11 +15,10 @@ class Map extends Component {
     }
 
     loadMap() {
+        const mapContainer = document.querySelector("#map");
         if (this.props && this.props.google) {
             const {google} = this.props;
             const maps = google.maps;
-
-            const divMapElement = document.querySelector("#map");
 
             //setup the Map
             const mapObj = Object.assign({}, {
@@ -31,32 +30,16 @@ class Map extends Component {
             })
 
             //inst. the map
-            this.map = new maps.Map(divMapElement, mapObj);
+            this.map = new maps.Map(mapContainer, mapObj);
             //unique instance of Bounds
             this.bounds = new google.maps.LatLngBounds();
             //unique instance of infoWindow
             this.largeInfowindow = new google.maps.InfoWindow();
 
-            //resize the map
-            checkSizeWindow(window);
-            maps.event.addDomListener(window, 'resize', function(e) {
-                checkSizeWindow(e.currentTarget)
-            });
-
-            function checkSizeWindow(objWindow){
-                if(objWindow.innerWidth < 475) {
-                    divMapElement.style.height = 'calc(100vh - 89px)';
-                } else {
-                    divMapElement.style.height = '91vh';
-                }
-            }
-
             //force the update here to get this.map filled
             this.forceUpdate();
         } else {
-            console.log('Ops! We cant access Google Maps API for now!')
-            let mapContainerElemt = document.querySelector('#map');
-            mapContainerElemt.innerHTML = '<div class="error-msg">Ops! We cant access Google Maps API for now! </div>'
+            mapContainer.innerHTML = `<div class="main__error">There is problem with Google's API <i class='fas fa-frown'></i> </div>`
         }
     }
 
@@ -65,13 +48,33 @@ class Map extends Component {
             width: '100%',
             height: '100vh'
         }
-
-        const { addMarker } = this.props;
-
+        const { addMarker,places } = this.props;
+        let locations=[];
+        if(places===''){
+            locations = config.locations;
+        }
+        else{
+            let tempLocations = config.locations;
+            for(let location of tempLocations){
+                let ok = false;
+                for(let locationS of places){
+                    if(location.name===locationS.props.name) {
+                        ok = true;
+                        location.marker = locationS;
+                    }
+                }
+                if(!ok) {
+                    location.marker.marker.setMap(null);
+                }
+                else{
+                    location.marker.marker.setMap(this.map);
+                }
+            }
+        }
         return (
             <div id='map' style={style} >
                 Loading map...
-                {config.locations.map( (location, index) => (
+                {locations.map( (location, index) => (
                     <Marker   key={index}
                               google={this.props.google}
                               map={this.map}

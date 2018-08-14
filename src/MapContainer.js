@@ -5,13 +5,14 @@ import Map from './map'
 export default class MapContainer extends Component {
 
     render() {
-        const { google,addMarker } = this.props;
+        const { google,addMarker,places } = this.props;
 
         return (
-                <main role="presentation"  aria-label="Map showing places">
+                <main role="application"  aria-label="Map showing places">
                     <Map
                         google={google}
                         addMarker={addMarker}
+                        places={places}
                     />
                 </main>
         )

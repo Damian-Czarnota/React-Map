@@ -8,6 +8,11 @@ body{
     flex-wrap:wrap;
 }
 
+.main__error{
+    text-align: center;
+    padding:15px;
+    border:2px solid #ff5f5f;
+}
 .main__nav{
     background-color: #ccc;
     width:25%;
@@ -113,9 +118,15 @@ body{
     cursor:pointer;
     border:2px solid #eee;
     margin:5px 0 ;
-    padding:10px;
 }
 
+.list__content-list ul li button{
+    width: 100%;
+    height: 40px;
+    background: transparent;
+    border: none;
+    text-align: left;
+}
 .list__content-list ul li:hover{
     color:#ccc;
     background-color: #909090;

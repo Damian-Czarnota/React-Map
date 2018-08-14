@@ -3,9 +3,15 @@ import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
 
 class Navigation extends Component{
-    state={
-        query:''
+    constructor(props){
+        super(props);
+        this.state={
+            query:''
+        }
+        this.showingPlaces=[];
+        this.updateQuery = this.updateQuery.bind(this);
     }
+
 
 
 
@@ -14,26 +20,33 @@ class Navigation extends Component{
     }
 
     updateQuery = (query) => {
+        const { locationMarkers,setPlaces } = this.props;
         this.setState({query:query})
+        const places = locationMarkers;
+
+        if(query){
+            const match = new RegExp(escapeRegExp(this.state.query),'i');
+            this.showingPlaces = places.filter((place) => match.test(place.props.name));
+        } else{
+            this.showingPlaces = places;
+        }
+        this.showingPlaces.sort(sortBy('name'));
+        setPlaces(this.showingPlaces);
     }
 
     clearQuery = (query) => {
+        const { locationMarkers,setPlaces } = this.props;
         this.setState({query:''})
+        setPlaces(locationMarkers);
     }
 
     render(){
         const { query } = this.state;
         const { locationMarkers } = this.props;
-        const places = locationMarkers;
 
-        let showingPlaces;
-        if(query){
-            const match = new RegExp(escapeRegExp(this.state.query),'i');
-            showingPlaces = places.filter((place) => match.test(place.props.name));
-        } else{
-            showingPlaces = places;
+        if(query===''){
+            this.showingPlaces=locationMarkers;
         }
-        showingPlaces.sort(sortBy('name'));
 
         return(
             <div>
@@ -58,9 +71,9 @@ class Navigation extends Component{
                                 </div>
                             <div className="list__content-list">
                                 <ul>
-                                    {showingPlaces&&(
-                                        showingPlaces.map(location =>(
-                                            <li key={location.props.name} onClick={(e) => this.setMarker(location)} >{location.props.name}</li>
+                                    {this.showingPlaces&&(
+                                        this.showingPlaces.map(location =>(
+                                            <li key={location.props.name} onClick={(e) => this.setMarker(location)}><button>{location.props.name}</button></li>
                                         ))
                                     )}
                                 </ul>

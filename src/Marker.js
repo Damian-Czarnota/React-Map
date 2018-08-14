@@ -108,7 +108,7 @@ class Marker extends Component {
                     similarData.forEach( similar => {
                         description += `<div><p style="margin:0;padding:0;">${similar.name}</p><p style="margin:0;padding:0;">${similar.location.formattedAddress}</p></div>`;
                     })
-                    description += `<p><em><small>Informations from Foursquare</small></em></p> </div>`;
+                    description += `<p><em><small>Informations from <img src="../img/foursquare.png" style="height:16px" /></small></em></p> </div>`;
                 } else {
                     description = `<p>There is no TIP's <i class="fas fa-frown"></i></p>`;
                 }
